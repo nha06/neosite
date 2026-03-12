@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEOSITE | NCT Quiz</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+/* ===== Quiz Styles ===== */
+.quiz-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: rgb(113,124,99);
+    color: bisque;
+    padding: 25px;
+    border-radius: 20px;
+    font-family: 'Press Start 2P', monospace;
+}
+h1 { text-align: center; color: rgb(138,255,87); }
+.question { margin-bottom: 20px; }
+.options button {
+    display: block;
+    margin: 8px 0;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 15px;
+    background-color: bisque;
+    color: rgb(67,130,0);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Press Start 2P', monospace;
+}
+.options button:hover {
+    background-color: rgb(132,255,0);
+    color: black;
+    transform: scale(1.05);
+}
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* Drag-and-drop Q2 styling */
+.drag-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background-color: rgb(138,255,87);
+    color: black;
+    border-radius: 15px;
+}
+.draggable {
+    padding: 10px 15px;
+    background-color: rgb(113,124,99);
+    color: bisque;
+    border-radius: 10px;
+    cursor: grab;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+.draggable.dragging {
+    opacity: 0.5;
+}
+</style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>How Well Do You Know NCT?</h1>
+    <div id="quiz"></div>
+    <div id="result"></div>
+</div>
+
+<script>
+// ===== Quiz Data =====
+const quizData = [
+    { 
+        question: "Q1: What does NCT stand for?", 
+        options: ["Neo Culture Technology", "New Cool Team", "Next Creative Talent"], 
+        answer: 0,
+        type: "mc"
+    },
+    { 
+        question: "Q2: Drag the NCT units into order of debut:", 
+        options: ["NCT Dream", "NCT JNJM", "NCT U", "NCT Wish", "WayV", "NCT DoJaeJung", "NCT 127"],
+        answer: ["NCT U", "NCT 127","NCT Dream", "WayV", "NCT DoJaeJung", "NCT Wish", "NCT JNJM"],
+        type: "drag"
+    },
+    { 
+        question: "Q3: What is the meaning of 127 in NCT 127?", 
+        options: ["Latitude of Seoul", "Longitude of Seoul", "Combined member ages", "Just a random number"], 
+        answer: 1,
+        type: "mc"
+    },
+    { 
+        question: "Q4: Which NCT Dream song links to their original concept?", 
+        options: ["Chewing Gum", "My First and Last", "Graduation"], 
+        answer: 2,
+        type: "mc"
+    },
+    { 
+        question: "Q5: What is WayV's debut song?", 
+        options: ["Regular", "We Go Up", "Turn Back Time"], 
+        answer: 0,
+        type: "mc"
+    },
+    { 
+        question: "Q6: What song did NCT DoJaeJung first perform as a unit?", 
+        options: ["Can We Go Back", "Replay", "Dream Launch"], 
+        answer: 0,
+        type: "mc"
+    },
+    { 
+        question: "Q7: What is the title of NCT Wish's debut song?", 
+        options: ["Dunk Shot", "WISH", "Poppop"], 
+        answer: 1,
+        type: "mc"
+    },
+    { 
+        question: "Q8: Who is the leader of NCT U?", 
+        options: ["Taeyong", "Mark", "Kun"], 
+        answer: 0,
+        type: "mc"
+    },
+    { 
+        question: "Q9: What is the title of NCT JnJm's debut song?", 
+        options: ["Which one is your best side?", "Best Side", "Both Sides"], 
+        answer: 2,
+        type: "mc"
+    },
+    { 
+        question: "Q10: Which NCT unit performed the song 'Phantom'?", 
+        options: ["NCT U", "NCT 127", "WayV"], 
+        answer: 2,
+        type: "mc"
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const quizEl = document.getElementById("quiz");
+const resultEl = document.getElementById("result");
+
+// ===== Show Question =====
+function showQuestion() {
+    if (currentQuestion >= quizData.length) {
+        quizEl.innerHTML = "";
+        resultEl.innerHTML = `
+            <h2>You scored ${score} out of ${quizData.length}!</h2>
+            <a href="homepage.html" class="back-btn">Back to Home</a>
+        `;
+        return;
+    }
+
+    const q = quizData[currentQuestion];
+
+    if (q.type === "mc") {
+        let optionsHTML = q.options.map((opt, idx) => 
+            `<button onclick="checkAnswer(${idx})">${opt}</button>`
+        ).join("");
+        quizEl.innerHTML = `
+            <div class="question">${q.question}</div>
+            <div class="options">${optionsHTML}</div>
+        `;
+    } else if (q.type === "drag") {
+        let dragHTML = q.options.map((opt, idx) => 
+            `<div class="draggable" draggable="true" data-value="${opt}">${opt}</div>`
+        ).join("");
+        quizEl.innerHTML = `
+            <div class="question">${q.question}</div>
+            <div class="drag-container" id="drag-list">
+                ${dragHTML}
+            </div>
+            <button class="options" onclick="checkAnswerDrag()">Submit Order</button>
+        `;
+        initDragDrop();
+    }
+}
+
+// ===== Multiple Choice Check =====
+function checkAnswer(selected) {
+    if (selected === quizData[currentQuestion].answer) {
+        score++;
+    }
+    currentQuestion++;
+    showQuestion();
+}
+
+// ===== Drag-and-Drop Check =====
+function checkAnswerDrag() {
+    const dragItems = document.querySelectorAll('#drag-list .draggable');
+    const order = [...dragItems].map(item => item.dataset.value);
+    const correct = quizData[currentQuestion].answer;
+    if (order.join(',') === correct.join(',')) {
+        score++;
+    }
+    currentQuestion++;
+    showQuestion();
+}
+
+// ===== Drag-and-Drop Functionality =====
+function initDragDrop() {
+    const dragContainer = document.getElementById('drag-list');
+    const draggables = document.querySelectorAll('.draggable');
+    let draggedItem = null;
+
+    draggables.forEach(item => {
+        item.addEventListener('dragstart', () => {
+            draggedItem = item;
+            setTimeout(() => item.classList.add('dragging'), 0);
+        });
+        item.addEventListener('dragend', () => {
+            item.classList.remove('dragging');
+            draggedItem = null;
+        });
+    });
+
+    dragContainer.addEventListener('dragover', e => {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(dragContainer, e.clientY);
+        if (afterElement == null) {
+            dragContainer.appendChild(draggedItem);
+        } else {
+            dragContainer.insertBefore(draggedItem, afterElement);
+        }
+    });
+}
+
+function getDragAfterElement(container, y) {
+    const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
+    return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child };
+        } else {
+            return closest;
+        }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+// ===== Initialize Quiz =====
+showQuestion();
+</script>
+
+</body>
+</html>

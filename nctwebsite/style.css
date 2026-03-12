@@ -1,0 +1,521 @@
+/* =========================
+   GLOBAL STYLES
+========================= */
+
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: bisque;
+    padding: 25px;
+    background-color: rgb(124, 127, 123);
+    margin: 10px;
+}
+
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+h1{
+    text-align: center;
+    color: rgb(138, 255, 87);
+    font-family: 'Press Start 2P', 'Courier New';
+}
+
+h2{
+    color: rgb(138, 255, 87);
+    font-family: 'Press Start 2P', 'Courier New';
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(81, 158, 0);
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    min-height: 60px;
+}
+
+.site-title{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    padding: 8px 0;
+}
+
+
+/* =========================
+   DROPDOWN MENU
+========================= */
+
+details summary{
+    font-size: 28px;
+    cursor: pointer;
+    color: bisque;
+    list-style: none;
+}
+
+details summary::-webkit-details-marker{
+    display: none;
+}
+
+.dropdown{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(113,124,99);
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.dropdown a{
+    color: bisque;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.dropdown a:hover{
+    background-color: rgb(132, 255, 0);
+    color: black;
+}
+
+.menu-container{
+position:relative;
+}
+
+.dropdown{
+position:absolute;
+top:40px;
+left:0;
+background-color:rgb(113,124,99);
+padding:15px;
+border-radius:15px;
+display:flex;
+flex-direction:column;
+gap:8px;
+width:200px;
+z-index:100;
+}
+
+/* submenu */
+
+.dropdown-group{
+    position: relative;
+    color: bisque;
+    cursor: pointer;
+}
+
+.submenu{
+    display: none;
+    flex-direction: column;
+    margin-left: 15px;
+}
+
+a {
+    transition: all 0.3s ease;
+}
+
+
+.dropdown-group:hover .submenu{
+    display: flex;
+}
+
+
+/* =========================
+   SEARCH BAR
+========================= */
+
+.search-container input{
+    padding: 7px 12px;
+    border-radius: 15px;
+    border: none;
+    font-family: inherit;
+}
+
+
+/* =========================
+   HOMEPAGE LAYOUT
+========================= */
+
+.homepage{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.content-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-section h2{
+    text-align: center;
+}
+
+
+/* =========================
+   CONTENT CARDS
+========================= */
+
+.content-card{
+    display: block;
+    background-color: rgb(85, 94, 74);
+    padding: 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: bisque;
+    width: 80%;
+    max-width: 600px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.content-card img{
+    width: 100%;
+    border-radius: 15px;
+}
+
+.content-card:hover{
+    background-color: rgb(132, 255, 0);
+    color: black;
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgb(132, 255, 0);
+}
+
+
+/* =========================
+   ALBUM PAGE LAYOUT
+========================= */
+
+.album{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 40px;
+    align-items: center;
+}
+
+.tracklist{
+    flex: 1;
+}
+
+.album-cover{
+    flex: 1;
+    max-width: 300px;
+    height: auto;
+    border-radius: 15px;
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-btn{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: bisque;
+    color: seagreen;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-family: courier new;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover{
+    background-color: rgb(132, 255, 0);
+    color: black;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgb(132, 255, 0);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top: 50px;
+    text-align: center;
+    color: bisque;
+}
+
+footer a{
+    color: rgb(132, 255, 0);
+    text-decoration: none;
+}
+
+/* LEARN NCT PAGE */
+
+.timeline-page{
+text-align:center;
+margin-top:40px;
+}
+
+/* timeline line */
+
+.timeline{
+position:relative;
+max-width:900px;
+margin:auto;
+}
+
+.timeline::after{
+content:'';
+position:absolute;
+width:4px;
+background-color:rgb(132,255,0);
+top:0;
+bottom:0;
+left:50%;
+margin-left:-2px;
+}
+
+/* timeline items */
+
+.timeline-item{
+background-color:rgb(113,124,99);
+padding:20px;
+border-radius:20px;
+width:40%;
+position:relative;
+margin:40px 0;
+transition:0.4s;
+}
+
+/* left side */
+
+.timeline-item:nth-child(odd){
+left:0;
+}
+
+/* right side */
+
+.timeline-item:nth-child(even){
+left:60%;
+}
+
+/* images */
+
+.timeline-item img{
+width:100%;
+border-radius:15px;
+margin-top:10px;
+}
+
+/* hover effect */
+
+.timeline-item:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px rgb(132,255,0);
+}
+
+.reveal{
+opacity:0;
+transform:scale(0.9);
+transition:0.6s ease;
+}
+
+.reveal.active{
+opacity:1;
+transform:scale(1);
+}
+
+/* TIMELINE PAGE LAYOUT */
+
+.timeline-item h2{
+background-color:rgb(132,255,0);
+color:black;
+display:inline-block;
+padding:6px 10px;
+border-radius:10px;
+font-size:14px;
+}
+
+.reveal{
+opacity:0;
+transform:scale(0.85);
+transition:all 0.6s ease;
+}
+
+.reveal.active{
+opacity:1;
+transform:scale(1);
+}
+
+.back-btn-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.back-btn {
+    display: inline-block;
+    background-color: rgb(113, 124, 99);
+    color: bisque;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-family: 'Press Start 2P', Courier, monospace;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.back-btn:hover {
+    background-color: rgb(132, 255, 0);
+    color: black;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+.timeline-item {
+    background-color: rgb(113,124,99);
+    padding: 20px;
+    border-radius: 20px;
+    width: 40%;
+    position: relative;
+    margin: 40px 0;
+    transition: 0.4s;
+}
+
+/* alternate sides */
+.timeline-item:nth-child(odd) .timeline-detail {
+    left: 105%; /* appears to the right of odd items */
+}
+
+.timeline-item:nth-child(even) .timeline-detail {
+    right: 105%; /* appears to the left of even items */
+}
+
+/* make image clickable cursor */
+.timeline-content img {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.timeline-content img:hover {
+    transform: scale(1.03);
+}
+
+/* =========================
+   TIMELINE ITEMS
+========================= */
+.timeline-item {
+  position: relative; /* NEW: so .timeline-detail positions relative to this item */
+}
+
+/* =========================
+   TIMELINE DETAILS
+========================= */
+
+.timeline-detail{
+  position:absolute;
+  top:50%; /* center vertically relative to timeline item */
+  transform: translateY(-50%) scale(0.9); /* vertically center */
+  width:200px;
+  background-color: rgb(132,255,0);
+  color:black;
+  padding:15px;
+  border-radius:20px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.4);
+  opacity:0;
+  transition: all 0.35s ease;
+  pointer-events:none;
+}
+
+/* visible state */
+.timeline-detail.active{
+  opacity:1;
+  transform: translateY(-50%) scale(1);
+  pointer-events:auto;
+}
+
+/* placement: left/right of timeline item */
+.timeline-item:nth-child(odd) .timeline-detail{
+  left:110%; /* right side */
+}
+
+.timeline-item:nth-child(even) .timeline-detail{
+  right:110%; /* left side */
+}
+
+/* h3 styling */
+.timeline-detail h3 {
+  margin-top: 0;
+  font-size: 16px;
+  font-family: 'Press Start 2P', Courier New;
+}
+
+.timeline-item,
+.timeline-detail{
+  font-family: Courier, monospace;
+  line-height:1.5;
+}
+
+.timeline-detail p{
+  margin-bottom:10px;
+}
+
+/* responsive: mobile-friendly */
+@media (max-width:768px){
+  .timeline-detail{
+    width:90%;
+    left:50% !important;
+    right:auto !important;
+    top:110%;
+    transform: translateX(-50%) scale(0.9);
+  }
+
+  .timeline-detail.active{
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+/* =========================
+   SOLOS NAV
+========================= */
+
+/* =========================
+   Navigation Links as Buttons
+========================= */
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+nav a {
+    display: inline-block;
+    background-color: rgb(113, 124, 99);
+    color: bisque;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+nav a:hover {
+    background-color: rgb(132, 255, 0);
+    color: black;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
