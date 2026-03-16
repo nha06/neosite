@@ -50,6 +50,13 @@ h2{
     padding: 8px 0;
 }
 
+.header-logo {
+    width: 32px;      /* small enough to sit nicely next to the title */
+    height: 32px;
+    vertical-align: middle;  /* aligns with text */
+    margin-right: 8px;       /* spacing between logo and text */
+}
+
 
 /* =========================
    DROPDOWN MENU
