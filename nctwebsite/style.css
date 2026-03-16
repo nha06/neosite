@@ -32,22 +32,22 @@ h2{
 ========================= */
 
 .site-header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
     background-color: rgb(81, 158, 0);
-    padding: 15px;
-    border-radius: 15px;
-    position: relative;
-    min-height: 60px;
+    padding:15px;
+    border-radius:15px;
+    min-height:60px;
+    flex-wrap:wrap;
 }
 
 .site-title{
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 0;
-    padding: 8px 0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin:0 auto;
 }
 
 .header-logo {
@@ -131,10 +131,47 @@ a {
 }
 
 
-.dropdown-group:hover .submenu{
-    display: flex;
+.dropdown-group[open] .submenu{
+    display:flex;
 }
 
+@media (max-width:768px){
+
+.site-header{
+    flex-direction:column;
+    gap:10px;
+}
+
+.menu-container{
+    align-self:flex-start;
+}
+
+.site-title{
+    font-size:16px;
+}
+
+.header-logo{
+    width:24px;
+    height:24px;
+}
+
+}
+
+.search-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.search-container input{
+    width:80%;
+}
+
+.dropdown{
+    width:220px;
+}
+
+}
 
 /* =========================
    SEARCH BAR
@@ -499,7 +536,7 @@ transform:scale(1);
    Navigation Links as Buttons
 ========================= */
 
-nav {
+main nav {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
