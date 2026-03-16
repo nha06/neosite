@@ -64,6 +64,11 @@ h1 { text-align: center; color: rgb(138,255,87); }
 .draggable.dragging {
     opacity: 0.5;
 }
+
+.draggable.selected {
+    outline: 3px solid rgb(132,255,0);
+}
+
 </style>
 </head>
 <body>
@@ -202,47 +207,66 @@ function checkAnswerDrag() {
     showQuestion();
 }
 
-// ===== Drag-and-Drop Functionality =====
 function initDragDrop() {
     const dragContainer = document.getElementById('drag-list');
     const draggables = document.querySelectorAll('.draggable');
+
     let draggedItem = null;
 
+    // ===== DESKTOP DRAG =====
     draggables.forEach(item => {
+
         item.addEventListener('dragstart', () => {
             draggedItem = item;
             setTimeout(() => item.classList.add('dragging'), 0);
         });
+
         item.addEventListener('dragend', () => {
             item.classList.remove('dragging');
             draggedItem = null;
         });
+
     });
 
     dragContainer.addEventListener('dragover', e => {
         e.preventDefault();
+
         const afterElement = getDragAfterElement(dragContainer, e.clientY);
+
         if (afterElement == null) {
             dragContainer.appendChild(draggedItem);
         } else {
             dragContainer.insertBefore(draggedItem, afterElement);
         }
     });
-}
 
-function getDragAfterElement(container, y) {
-    const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
-    return draggableElements.reduce((closest, child) => {
-        const box = child.getBoundingClientRect();
-        const offset = y - box.top - box.height / 2;
-        if (offset < 0 && offset > closest.offset) {
-            return { offset: offset, element: child };
-        } else {
-            return closest;
-        }
-    }, { offset: Number.NEGATIVE_INFINITY }).element;
-}
 
+    // ===== MOBILE TAP REORDER =====
+    let selectedItem = null;
+
+    draggables.forEach(item => {
+
+        item.addEventListener("click", () => {
+
+            if (!selectedItem) {
+
+                selectedItem = item;
+                item.classList.add("selected");
+
+            } else {
+
+                dragContainer.insertBefore(selectedItem, item);
+
+                selectedItem.classList.remove("selected");
+                selectedItem = null;
+
+            }
+
+        });
+
+    });
+
+}
 // ===== Initialize Quiz =====
 showQuestion();
 </script>

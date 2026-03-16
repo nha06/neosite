@@ -171,7 +171,7 @@ a {
     width:220px;
 }
 
-}
+
 
 /* =========================
    SEARCH BAR
@@ -182,6 +182,38 @@ a {
     border-radius: 15px;
     border: none;
     font-family: inherit;
+}
+
+/* =========================
+   SEARCH AUTOCOMPLETE
+========================= */
+
+.search-container{
+    position: relative;
+}
+
+.search-results{
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: rgb(113,124,99);
+    border-radius: 10px;
+    width: 200px;
+    overflow: hidden;
+    display: none;
+    z-index: 200;
+}
+
+.search-results a{
+    display:block;
+    padding:10px;
+    color:bisque;
+    text-decoration:none;
+}
+
+.search-results a:hover{
+    background-color: rgb(132,255,0);
+    color:black;
 }
 
 

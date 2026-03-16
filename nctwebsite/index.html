@@ -50,7 +50,8 @@
         </h1>
 
         <div class="search-container">
-            <input type="text" placeholder="Search...">
+            <input type="text" id="search-input" placeholder="Search...">
+            <div id="search-results" class="search-results"></div>
         </div>
     </header>
 
@@ -117,6 +118,56 @@
         <p>Fan-made project | Not affiliated with NCT</p>
         <p>Contact to report any bugs/broken links: <a href="mailto:lzve11le@gmail.com">EMAIL</a></p>
     </footer>
+
+    <script>
+
+        const searchData = [
+            { name: "NCT 127 Album Rankings", url: "127.html" },
+            { name: "NCT Dream Album Rankings", url: "dream.html" },
+            { name: "WayV Album Rankings", url: "wayv.html" },
+            { name: "NCT U Album Rankings", url: "u.html" },
+            { name: "NCT DoJaeJung Album Rankings", url: "dojaejung.html" },
+            { name: "NCT Wish Album Rankings", url: "wish.html" },
+            { name: "Solos Album Rankings", url: "solos.html" },
+            { name: "Learn About NCT", url: "learnnct.html" },
+            { name: "NCT Masterlist", url: "masterlist.html" },
+            { name: "Quizzes", url: "quizzes.html" },
+            { name: "Minigames", url: "minigames.html" },
+            { name: "About NEOSITE", url: "about.html" }
+        ];
+
+        const input = document.getElementById("search-input");
+        const resultsBox = document.getElementById("search-results");
+
+        input.addEventListener("input", () => {
+
+            const query = input.value.toLowerCase();
+            resultsBox.innerHTML = "";
+
+            if (query.length === 0) {
+                resultsBox.style.display = "none";
+                return;
+            }
+
+            const matches = searchData.filter(item =>
+                item.name.toLowerCase().includes(query)
+            );
+
+            matches.forEach(match => {
+
+                const link = document.createElement("a");
+                link.href = match.url;
+                link.textContent = match.name;
+
+                resultsBox.appendChild(link);
+
+            });
+
+            resultsBox.style.display = matches.length ? "block" : "none";
+
+        });
+
+    </script>
 
 </body>
 
