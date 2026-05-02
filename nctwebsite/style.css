@@ -575,42 +575,63 @@ footer a {
 
 /* responsive: mobile-friendly */
 @media (max-width: 768px) {
-  .site-header {
-    grid-template-columns: auto 1fr auto; /* hamburger | title | search */
-    padding: 10px 15px;
-  }
+    .site-header {
+        grid-template-columns: auto 1fr auto;
+        padding: 10px 15px;
+    }
 
-  .site-title {
-    font-size: 11px;
-    justify-content: center;
-  }
+    .site-title {
+        font-size: 11px;
+        justify-content: center;
+    }
 
-  .header-logo {
-    width: 20px;
-    height: 20px;
-  }
+    .header-logo {
+        width: 20px;
+        height: 20px;
+    }
 
-  .search-container input {
-    width: 110px;
-  }
+    .search-container input {
+        width: 110px;
+    }
 
-  .search-results {
-    width: 180px;
-    right: 0;
-    left: auto;
-  }
+    .search-results {
+        width: 180px;
+        right: 0;
+        left: auto;
+    }
 
-  .dropdown {
-    width: 180px;
-  }
+    .dropdown {
+        width: 180px;
+    }
 
-  .content-card {
-    width: 95%;
-  }
-  .homepage {
-    grid-template-columns: 1fr;
-  }
+    /* homepage grid — single column on mobile */
+    .homepage {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 10px;
+    }
+
+    .content-section {
+        align-items: center;
+    }
+
+    .content-card {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    /* fix image height — too tall on mobile */
+    .content-card img {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .content-section h2 {
+        font-size: 10px;
+        text-align: center;
+    }
 }
+
 
 /* =========================
    SOLOS NAV
