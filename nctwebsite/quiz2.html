@@ -210,25 +210,25 @@
                 song: "Make A Wish — NCT U",
                 lyric: "Never stop keep ___ still working all the time",
                 answer: "breaking out",
-                options: ["breaking out", "moving on", "standing up", "pushing through"]
+                options: ["standing up", "moving on", "breaking out", "pushing through"]
             },
             {
                 song: "Smoke — Jaehyun",
                 lyric: "___ trunk goin' crazy",
                 answer: "808",
-                options: ["808", "707", "909", "606"]
+                options: ["707", "808", "909", "606"]
             },
             {
                 song: "Give Me That — WayV",
                 lyric: "Yeah, girl, you a PYT, I could put you in the ___",
                 answer: "VIP",
-                options: ["VIP", "DM", "mix", "spotlight"]
+                options: ["spotlight", "DM", "mix", "VIP"]
             },
             {
                 song: "Wind Up — NCT JNJM",
                 lyric: "If you ___ side, if you west side",
                 answer: "east",
-                options: ["east", "best", "left", "right"]
+                options: ["right", "best", "left", "east"]
             },
             {
                 song: "Sugar — Jungwoo",
@@ -246,13 +246,13 @@
                 song: "Baggy Jeans — NCT U",
                 lyric: "Baby, you ain't know what is in my ___",
                 answer: "pocket",
-                options: ["pocket", "heart", "mind", "world"]
+                options: ["mind", "heart", "pocket", "world"]
             },
             {
                 song: "Fact Check — NCT 127",
                 lyric: "Monalisa never ___, don't you see?",
                 answer: "cry",
-                options: ["cry", "lie", "try", "die"]
+                options: ["lie", "cry", "try", "die"]
             },
             {
                 song: "TAP — Taeyong",
@@ -319,7 +319,7 @@
             if (isCorrect) {
                 score++;
                 buttons[selectedIdx].classList.add("correct");
-                feedback.textContent = "✓ Correct!";
+                feedback.textContent = "Correct!";
                 feedback.className = "feedback correct";
                 // fill in the blank with the answer
                 document.querySelector(".blank").textContent = q.answer;
@@ -329,7 +329,7 @@
                 q.options.forEach((opt, idx) => {
                     if (opt === q.answer) buttons[idx].classList.add("correct");
                 });
-                feedback.textContent = `✗ The answer was "${q.answer}"`;
+                feedback.textContent = `WRONG. The answer was "${q.answer}"`;
                 feedback.className = "feedback wrong";
                 document.querySelector(".blank").textContent = q.answer;
             }
@@ -344,7 +344,7 @@
 
         function getResultMessage() {
             if (score === lyricData.length) return "Perfect, you know every word!";
-            if (score >= 7) return "You really know your NCT lyrics!! 💚";
+            if (score >= 7) return "You really know your NCT lyrics!!";
             if (score >= 4) return "Not bad! Keep listening.";
             return "Time for a re-listen session...";
         }
