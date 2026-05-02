@@ -6,31 +6,170 @@
     <title>About - NEOSITE</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="script.js"></script>
+    <style>
+        .about-wrapper {
+            max-width: 750px;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .about-card {
+            background-color: rgb(113, 124, 99);
+            border-radius: 20px;
+            padding: 25px 30px;
+            line-height: 1.9;
+            font-size: 14px;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .about-card:hover {
+            box-shadow: 0 0 18px rgba(132, 255, 0, 0.3);
+        }
+
+        .about-card-label {
+            display: inline-block;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 9px;
+            background-color: rgb(132, 255, 0);
+            color: black;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+        }
+
+        .about-card p {
+            margin: 0;
+            color: bisque;
+        }
+
+        .about-card em {
+            color: rgb(132, 255, 0);
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        /* alternating left border accent */
+        .about-card:nth-child(odd) {
+            border-left: 4px solid rgb(132, 255, 0);
+        }
+
+        .about-card:nth-child(even) {
+            border-right: 4px solid rgb(138, 255, 87);
+            border-left: none;
+        }
+
+        .about-footer-note {
+            text-align: center;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 9px;
+            color: rgb(132, 255, 0);
+            margin-top: 10px;
+            line-height: 2;
+        }
+
+        @media (max-width: 768px) {
+            .about-wrapper {
+                margin: 20px 10px;
+            }
+
+            .about-card {
+                padding: 20px;
+                font-size: 13px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-
     <header class="site-header">
-        <h1 class="site-title">About NEOSITE</h1>
+        <div class="menu-container">
+            <details>
+                <summary>☰</summary>
+                <nav class="dropdown">
+                    <details class="dropdown-group">
+                        <summary>Album Rankings ▸</summary>
+                        <div class="submenu">
+                            <a href="127.html">NCT 127</a>
+                            <a href="dream.html">NCT Dream</a>
+                            <a href="u.html">NCT U</a>
+                            <a href="wayv.html">WayV</a>
+                            <a href="dojaejung.html">NCT Dojaejung</a>
+                            <a href="wish.html">NCT Wish</a>
+                            <a href="solos.html">Solos</a>
+                        </div>
+                    </details>
+                    <a href="learnnct.html">Learn about NCT</a>
+                    <a href="masterlist.html">NCT Masterlist</a>
+                    <a href="quizzes.html">Quizzes</a>
+                    <a href="minigames.html">Minigames</a>
+                    <a href="about.html">About</a>
+                </nav>
+            </details>
+        </div>
+
+        <a href="index.html" class="site-title-link">
+            <h1 class="site-title">
+                <img src="favicon.ico" alt="NEOSITE logo" class="header-logo">
+                NEOSITE
+            </h1>
+        </a>
+
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search...">
+            <div id="search-results" class="search-results"></div>
+        </div>
     </header>
 
     <main>
-        <p class="intro">
-            NEOSITE is a fan-made project created to organise and rank NCT albums,
-            content, and quizzes in one place. This website is for practice with
-            HTML and CSS and to express my interests as an NCTzen.
-        </p>
+        <h1>ABOUT NEOSITE</h1>
 
-        <p class="intro">
-            You can explore album rankings, content recommendations, and quizzes.
-        </p>
+        <div class="about-wrapper">
 
-        <p class="intro"> I have lots of plans on how to make this website even better, both with features and design improvements, so stay tuned!</p>
+            <div class="about-card">
+                <span class="about-card-label">✦ THE PROJECT</span>
+                <p>NEOSITE is a fan-made project I built initially as a way to consolidate my knowledge of
+                <em>HTML, CSS and JavaScript</em> — but I wanted to do it in a way that was actually fun,
+                hence the theme of NCT, my favourite group! I hope it can be a useful resource for other
+                NCT fans, whether you're new to the fandom or have been here for a while.</p>
+            </div>
+
+            <div class="about-card">
+                <span class="about-card-label">✦ WHAT'S HERE</span>
+                <p>You can explore <em>NCT album rankings</em> — obviously biased since they're mine! But if you
+                want to use them as a way to discover new songs or albums, that's great. There's also a
+                <em>timeline of NCT's units and subunits</em> to help anyone getting into the group. I know
+                it can be really overwhelming, especially with so many members, subunits, and things
+                happening every single week.</p>
+            </div>
+
+            <div class="about-card">
+                <span class="about-card-label">✦ COMING SOON</span>
+                <p>I'm planning to build out a <em>masterlist of content</em> — possibly with a random content
+                generator so you don't have to scroll through hundreds of videos on the NCT channel — as
+                well as <em>more diverse quizzes</em> to test your knowledge or just waste some time with. There are lots
+                of ideas in the pipeline, both features and design improvements!</p>
+            </div>
+
+            <div class="about-card">
+                <span class="about-card-label">✦ A NOTE</span>
+                <p>This is all coming together in my own time, by myself, so updates will happen as regularly
+                as I can manage. Thanks for visiting NEOSITE and I hope you enjoy it!</p>
+            </div>
+
+        </div>
+
+        <p class="about-footer-note">fan-made ✦ not affiliated with NCT or SM Entertainment ✦ made with love</p>
 
     </main>
 
     <footer>
-        <p> <em> All Rights Reserved © 2026 NEOSITE. All rights reserved. </em></p>
+        <p><em>All Rights Reserved &copy; 2026 NEOSITE. All rights reserved.</em></p>
         <p>Fan-made project | Not affiliated with NCT</p>
         <p>Contact to report any bugs/broken links: <a href="mailto:lzve11le@gmail.com">EMAIL</a></p>
     </footer>

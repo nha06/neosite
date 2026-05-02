@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEOSITE | Lyric Fill-In</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        .quiz-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: rgb(113, 124, 99);
+            color: bisque;
+            padding: 30px;
+            border-radius: 20px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .progress {
+            font-size: 11px;
+            color: rgb(132, 255, 0);
+            font-family: 'Press Start 2P', monospace;
+            margin-bottom: 20px;
+        }
+
+        .song-label {
+            font-size: 11px;
+            color: rgb(132, 255, 0);
+            font-family: 'Press Start 2P', monospace;
+            margin-bottom: 14px;
+            line-height: 1.8;
+        }
+
+        .lyric {
+            font-size: 17px;
+            line-height: 2;
+            margin-bottom: 25px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 100px;
+            border-bottom: 3px solid rgb(132, 255, 0);
+            color: rgb(132, 255, 0);
+            font-style: normal;
+            font-weight: bold;
+            text-align: center;
+            padding: 0 6px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options button {
+            padding: 12px 15px;
+            border: none;
+            border-radius: 15px;
+            background-color: bisque;
+            color: rgb(67, 130, 0);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .options button:hover:not(:disabled) {
+            background-color: rgb(132, 255, 0);
+            color: black;
+            transform: scale(1.02);
+        }
+
+        .options button:disabled {
+            cursor: default;
+        }
+
+        .options button.correct {
+            background-color: rgb(132, 255, 0);
+            color: black;
+        }
+
+        .options button.wrong {
+            background-color: rgb(180, 60, 60);
+            color: white;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-size: 13px;
+            font-family: 'Press Start 2P', monospace;
+            line-height: 1.8;
+            min-height: 24px;
+            text-align: center;
+        }
+
+        .feedback.correct {
+            color: rgb(132, 255, 0);
+        }
+
+        .feedback.wrong {
+            color: rgb(255, 120, 120);
+        }
+
+        .next-btn {
+            margin-top: 20px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 15px;
+            background-color: rgb(132, 255, 0);
+            color: black;
+            cursor: pointer;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 11px;
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .next-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 12px rgb(132, 255, 0);
+        }
+
+        #result {
+            text-align: center;
+            font-family: 'Press Start 2P', monospace;
+            line-height: 2.2;
+            font-size: 13px;
+        }
+
+        #result h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="menu-container">
+            <details>
+                <summary>☰</summary>
+                <nav class="dropdown">
+                    <details class="dropdown-group">
+                        <summary>Album Rankings ▸</summary>
+                        <div class="submenu">
+                            <a href="127.html">NCT 127</a>
+                            <a href="dream.html">NCT Dream</a>
+                            <a href="u.html">NCT U</a>
+                            <a href="wayv.html">WayV</a>
+                            <a href="dojaejung.html">NCT Dojaejung</a>
+                            <a href="wish.html">NCT Wish</a>
+                            <a href="solos.html">Solos</a>
+                        </div>
+                    </details>
+                    <a href="learnnct.html">Learn about NCT</a>
+                    <a href="masterlist.html">NCT Masterlist</a>
+                    <a href="quizzes.html">Quizzes</a>
+                    <a href="minigames.html">Minigames</a>
+                    <a href="about.html">About</a>
+                </nav>
+            </details>
+        </div>
+
+        <a href="index.html" class="site-title-link">
+            <h1 class="site-title">
+                <img src="favicon.ico" alt="NEOSITE logo" class="header-logo">
+                NEOSITE
+            </h1>
+        </a>
+
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search...">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="quiz-container">
+            <h1>Lyric Fill-In</h1>
+            <div class="progress" id="progress"></div>
+            <div id="quiz"></div>
+            <div id="result"></div>
+        </div>
+    </main>
+
+    <footer>
+        <p><em>All Rights Reserved &copy; 2026 NEOSITE. All rights reserved.</em></p>
+        <p>Fan-made project | Not affiliated with NCT</p>
+        <p>Contact to report any bugs/broken links: <a href="mailto:lzve11le@gmail.com">EMAIL</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const lyricData = [
+            {
+                song: "Hello Future — NCT Dream",
+                lyric: "Big dreams and big ___",
+                answer: "thrills",
+                options: ["thrills", "chills", "skills", "feels"]
+            },
+            {
+                song: "Make A Wish — NCT U",
+                lyric: "Never stop keep ___ still working all the time",
+                answer: "breaking out",
+                options: ["breaking out", "moving on", "standing up", "pushing through"]
+            },
+            {
+                song: "Smoke — Jaehyun",
+                lyric: "___ trunk goin' crazy",
+                answer: "808",
+                options: ["808", "707", "909", "606"]
+            },
+            {
+                song: "Give Me That — WayV",
+                lyric: "Yeah, girl, you a PYT, I could put you in the ___",
+                answer: "VIP",
+                options: ["VIP", "DM", "mix", "spotlight"]
+            },
+            {
+                song: "Wind Up — NCT JNJM",
+                lyric: "If you ___ side, if you west side",
+                answer: "east",
+                options: ["east", "best", "left", "right"]
+            },
+            {
+                song: "Sugar — Jungwoo",
+                lyric: "When I'm feelin' ___",
+                answer: "bitter",
+                options: ["bitter", "lonely", "better", "restless"]
+            },
+            {
+                song: "Songbird — NCT Wish",
+                lyric: "Sing the ___ again now",
+                answer: "melody",
+                options: ["melody", "harmony", "chorus", "rhythm"]
+            },
+            {
+                song: "Baggy Jeans — NCT U",
+                lyric: "Baby, you ain't know what is in my ___",
+                answer: "pocket",
+                options: ["pocket", "heart", "mind", "world"]
+            },
+            {
+                song: "Fact Check — NCT 127",
+                lyric: "Monalisa never ___, don't you see?",
+                answer: "cry",
+                options: ["cry", "lie", "try", "die"]
+            },
+            {
+                song: "TAP — Taeyong",
+                lyric: "We like to dance while ___ on the floor, you know",
+                answer: "sweating",
+                options: ["sweating", "sliding", "spinning", "stomping"]
+            }
+        ];
+
+        let current = 0;
+        let score = 0;
+        let answered = false;
+
+        const quizEl = document.getElementById("quiz");
+        const resultEl = document.getElementById("result");
+        const progressEl = document.getElementById("progress");
+
+        function showQuestion() {
+            if (current >= lyricData.length) {
+                progressEl.textContent = "";
+                quizEl.innerHTML = "";
+                resultEl.innerHTML = `
+                    <h2>You scored ${score} / ${lyricData.length}!</h2>
+                    <p>${getResultMessage()}</p>
+                    <br>
+                    <a href="quizzes.html" class="back-btn" style="position:static; display:inline-block; margin-top:15px;">Back to Quizzes</a>
+                `;
+                return;
+            }
+
+            answered = false;
+            const q = lyricData[current];
+            progressEl.textContent = `Question ${current + 1} of ${lyricData.length}`;
+
+            const optionsHTML = q.options.map((opt, idx) =>
+                `<button onclick="checkAnswer(${idx})">${opt}</button>`
+            ).join("");
+
+            quizEl.innerHTML = `
+                <div class="song-label"> ${q.song}</div>
+                <div class="lyric">"${q.lyric.replace("___", '<span class="blank">___</span>')}"</div>
+                <div class="options">${optionsHTML}</div>
+                <div class="feedback" id="feedback"></div>
+                <button class="next-btn" id="next-btn" onclick="nextQuestion()">
+                    ${current === lyricData.length - 1 ? "See Results →" : "Next →"}
+                </button>
+            `;
+        }
+
+        function checkAnswer(selectedIdx) {
+            if (answered) return;
+            answered = true;
+
+            const q = lyricData[current];
+            const buttons = document.querySelectorAll(".options button");
+            const feedback = document.getElementById("feedback");
+            const nextBtn = document.getElementById("next-btn");
+
+            buttons.forEach(btn => btn.disabled = true);
+
+            const selectedAnswer = q.options[selectedIdx];
+            const isCorrect = selectedAnswer === q.answer;
+
+            if (isCorrect) {
+                score++;
+                buttons[selectedIdx].classList.add("correct");
+                feedback.textContent = "✓ Correct!";
+                feedback.className = "feedback correct";
+                // fill in the blank with the answer
+                document.querySelector(".blank").textContent = q.answer;
+            } else {
+                buttons[selectedIdx].classList.add("wrong");
+                // highlight the correct one
+                q.options.forEach((opt, idx) => {
+                    if (opt === q.answer) buttons[idx].classList.add("correct");
+                });
+                feedback.textContent = `✗ The answer was "${q.answer}"`;
+                feedback.className = "feedback wrong";
+                document.querySelector(".blank").textContent = q.answer;
+            }
+
+            nextBtn.style.display = "block";
+        }
+
+        function nextQuestion() {
+            current++;
+            showQuestion();
+        }
+
+        function getResultMessage() {
+            if (score === lyricData.length) return "Perfect, you know every word!";
+            if (score >= 7) return "You really know your NCT lyrics!! 💚";
+            if (score >= 4) return "Not bad! Keep listening.";
+            return "Time for a re-listen session...";
+        }
+
+        showQuestion();
+    </script>
+
+</body>
+</html>
